@@ -1,0 +1,45 @@
+#nav{
+    height: 60px;
+    width: 100%;
+}
+
+#nav-box{
+    height: 100%;
+    width: 900px;
+    margin: 0 auto;
+}
+
+#nav-box ul li{
+    display: inline;
+}
+
+#nav-box ul {
+    padding-left: 10px;
+    width: 800px;
+    height: 100%;
+    line-height: 60px;
+}
+
+#nav-box ul li{
+    display: inline-block;
+    padding: 0 25px;
+    height: 100%;
+    text-align: center;
+}
+
+#nav-box ul li a{
+    display: inline-block;
+    padding: 0 0;
+    line-height: 60px;
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
+}
+
+#nav-box ul li a:hover{
+    color: #31c27c;
+}
+
+.nav_selected{
+    color: #31c27c !important;
+}
