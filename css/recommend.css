@@ -2,6 +2,8 @@
     width: 100%;
     height: 460px;
     background-color: #ddd;
+    position: relative;
+    overflow: hidden;
 }
 
 .recommend_title{
@@ -13,6 +15,52 @@
     letter-spacing: 10px;
     font-weight: bold;
     font-size: 2em;
+}
+
+.pre{
+    width: 80px;
+    height: 100px;
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    margin-top: -30px;
+    background-color: #ccc;
+    overflow: hidden;
+    opacity: 0.7;
+}
+.pre_icon{
+    display: block;
+    width: 30px;
+    height: 40px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    margin-top: -20px;
+    background: url("../image/icon_sprite.png");
+    background-position: -40px -258px;
+}
+
+.next{
+    width: 80px;
+    height: 100px;
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    margin-top: -30px;
+    background-color: #ccc;
+    overflow: hidden;
+    opacity: 0.7;
+}
+.next_icon{
+    display: block;
+    width: 30px;
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -20px;
+    background: url("../image/icon_sprite.png");
+    background-position: -9px -258px;
 }
 
 #recpmmend-top-nav{
@@ -85,10 +133,34 @@
 .rec-image{
     width: 220px;
     height: 220px;
+    overflow: hidden;
+
+
 }
+
+/*#playCanvas{*/
+    /*width: 60px;*/
+    /*height: 60px;*/
+    /*border-radius: 50%;*/
+    /*background-color: #fff;*/
+    /*position: absolute;*/
+    /*top:0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*margin: auto;*/
+    /*z-index: 99;*/
+    /*display: none;*/
+/*}*/
 .rec-image img{
-    height: 99%;
-    width: 99%;
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s;
+}
+
+.rec-image-current{
+    transform: scale(1.1);
+
 }
 
 .rec_image_title{
@@ -103,3 +175,4 @@
 .play_count{
     color: #777;
 }
+
