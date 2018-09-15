@@ -54,3 +54,52 @@
 .nav_selected{
     color: #31c27c !important;
 }
+
+#rec-slider{
+    width: 1200px;
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+#rec-slider ul {
+    width: 2400px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#rec-slider ul li{
+    width: 1200px;
+    height: 300px;
+    float: left;
+}
+.rec-slider-item{
+    width: 235px;
+    height: 300px;
+    float: left;
+}
+.rec-slider-item-mg{
+    margin-right: 2px;
+}
+.rec-image{
+    width: 220px;
+    height: 220px;
+}
+.rec-image img{
+    height: 99%;
+    width: 99%;
+}
+
+.rec_image_title{
+    width: 230px;
+    height: 55px;
+    margin-top: 10px;
+}
+
+.rec_image_title p{
+    font-size: 14px;
+}
+.play_count{
+    color: #777;
+}
