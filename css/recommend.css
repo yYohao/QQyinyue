@@ -1,7 +1,7 @@
 #song-recommend{
     width: 100%;
-    height: 460px;
-    background-color: #ddd;
+    height: 500px;
+    background: linear-gradient(to bottom, #eee 0%,#ffffff 100%);
     position: relative;
     overflow: hidden;
 }
@@ -122,13 +122,18 @@
     height: 300px;
     float: left;
     position: absolute;
-    left: 0;
+
     top: 0;
 }
 .center_li{
-    left: 1200px !important;
+    left: 1200px;
 }
-
+.left_li{
+    left: 0;
+}
+.right_li{
+    left: 2400px;
+}
 .rec-slider-item{
     width: 235px;
     height: 300px;
@@ -176,3 +181,26 @@
     color: #777;
 }
 
+#current-mark{
+    width: 80px;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.current_mark{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 8px 5px 0 10px ;
+    background-color: #bbb;
+    cursor: pointer;
+}
+
+.mark_seleced{
+    background-color: #888;
+}
+
+.current_mark:hover{
+    background-color: #888;
+}
