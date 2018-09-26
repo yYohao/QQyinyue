@@ -1,6 +1,8 @@
 window.onload = function () {
     var allItems = $(".rec-image");
     var recommend = $("#song-recommend");
+    var new_songs = $("#new-songs");
+    var new_songs_items = $(".new_songs_image");
     var pre = document.getElementsByClassName("pre")[0];
     var next = document.getElementsByClassName("next")[0];
     var rec_slider= document.getElementById("rec-slider-ul");
@@ -41,12 +43,10 @@ window.onload = function () {
             })
     };
 
+    //歌单推荐鼠标进入效果
     recommend.mouseover(function () {
-        $(".pre").animate({left:"0"},500);
-        $(".next").animate({right:"0"},500);
-
-
-
+        $("#song-recommend .pre").animate({left:"0"},500);
+        $("#song-recommend .next").animate({right:"0"},500);
         for (var i=0; i<allItems.length; i++){
             (function (i) {
                 var item = allItems[i];
@@ -61,21 +61,39 @@ window.onload = function () {
                         // $("#playCanvas").fadeOut(500);
                     }
                 };
-
                 recommend.bind("mouseleave",function () {
-                    $(".pre").stop().animate({left:"-80px"},200);
-                    $(".next").stop().animate({right:"-80px"},200);
-
+                    $("#song-recommend .pre").stop().animate({left:"-80px"},200);
+                    $("#song-recommend .next").stop().animate({right:"-80px"},200);
                 });
-
             })(i)
         }
-
-
-
-
     });
-
+    //新歌首发鼠标进入效果
+    new_songs.mouseover(function () {
+        console.log(111);
+        $("#new-songs .pre").animate({left:"0"},500);
+        $("#new-songs .next").animate({right:"0"},500);
+        for (var j=0; j<new_songs_items.length; j++){
+            (function (j) {
+                var item = new_songs_items[j];
+                item.style.transition = "all 2s";
+                item.onmouseover = function () {
+                    item.children[0].className = 'songs-image-current';
+                    //item.children[1].className = 'rec-image-current';
+                    //$("#playCanvas").fadeIn(500);
+                    item.onmouseout = function () {
+                        item.children[0].className = '';
+                        //item.children[1].className = '';
+                        // $("#playCanvas").fadeOut(500);
+                    }
+                };
+                new_songs.bind("mouseleave",function () {
+                    $("#new-songs .pre").stop().animate({left:"-80px"},200);
+                    $("#new-songs .next").stop().animate({right:"-80px"},200);
+                });
+            })(j)
+        }
+    });
 
 };
 
