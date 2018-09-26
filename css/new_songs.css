@@ -1,6 +1,6 @@
 #new-songs{
     width: 100%;
-    height: 560px;
+    height: 600px;
     background: linear-gradient(to bottom, #eee 0%,#ffffff 100%);
     position: relative;
     overflow: hidden;
@@ -81,16 +81,18 @@
     position: relative;
 }
 #all-new-songs{
-    width: 4800px;
+    width: 4850px;
     height: 100%;
     position: absolute;
     left: -1200px;
     top: 0;
+    /*background-color: red;*/
 }
 .new-songs-items{
     display: inline-block;
     width: 1200px;
     height: 100%;
+
 }
 /* 每一首歌 */
 .new-songs-item{
@@ -110,6 +112,7 @@
     height: 100px;
     overflow: hidden;
     background-color: #000;
+    cursor: pointer;
 }
 .new_songs_image img{
     width: 100%;
@@ -142,10 +145,20 @@
     cursor: pointer;
 }
 /* 歌手名 */
-.author-name{
+.author-names{
     display: block;
-    height: 20px;
+    height: 23px;
     color:gray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
+.author_d:after{
+    content: " / ";
+    color:gray;
+}
+.author-name{
     cursor: pointer;
 }
 .song-name:hover,.author-name:hover{
