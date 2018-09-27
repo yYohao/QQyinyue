@@ -1,18 +1,18 @@
 window.onload = function () {
-    var allItems = $(".rec-image");
-    var recommend = $("#song-recommend");
-    var new_songs = $("#new-songs");
-    var new_songs_items = $(".new_songs_image");
-    var pre = document.getElementsByClassName("pre")[0];
-    var next = document.getElementsByClassName("next")[0];
-    var new_pre = document.getElementById("new-pre");
-    var new_next = document.getElementById("new-next");
-    var rec_slider= document.getElementById("rec-slider-ul");
-    var current_mark = document.getElementById("current-mark");
+    let allItems = $(".rec-image");
+    let recommend = $("#song-recommend");
+    let new_songs = $("#new-songs");
+    let new_songs_items = $(".new_songs_image");
+    let pre = document.getElementsByClassName("pre")[0];
+    let next = document.getElementsByClassName("next")[0];
+    let new_pre = document.getElementById("new-pre");
+    let new_next = document.getElementById("new-next");
+    let rec_slider= document.getElementById("rec-slider-ul");
+    let current_mark = document.getElementById("current-mark");
     let all_new_songs = document.getElementById("all-new-songs");
     let news_current_mark = document.getElementById("news-current-mark");
     let new_marks = news_current_mark.children;
-    var currentIndex = 1, nextIndex = 0;
+    let currentIndex = 1, nextIndex = 0;
     let new_currentIndex = 1, new_nextIndex = 0;
     //左箭头点击事件
     pre.onclick = function () {
@@ -50,24 +50,54 @@ window.onload = function () {
     };
 
     //新歌首发中箭头点击事件
-    new_pre.addEventListener("click",new_pre_action);
-    function new_pre_action(){
-        new_nextIndex = new_currentIndex + 1;
-        move(all_new_songs, (new_nextIndex * -1200));
-        if (new_nextIndex === 5){
-            new_nextIndex = 1;
-        }
-        new_currentIndex = new_nextIndex;
-    };
 
-    new_next.onclick = function(){
-        new_nextIndex = new_currentIndex - 1;
-        move(all_new_songs, (new_nextIndex * -1200));
-        if (new_nextIndex === 0){
-            new_nextIndex = 4;
+    function p_event(){
+        new_pre.removeEventListener("click",p_event);
+        new_pre_action(new_currentIndex,all_new_songs, 1,(ni)=>{
+            new_currentIndex = ni;
+            all_new_songs.style.left = new_currentIndex * -1200 + "px";
+        });
+        for (let i=0; i<new_marks.length; i++){
+            new_marks[i].className = "current_mark";
+            console.log(new_marks[i]);
         }
-        new_currentIndex = new_nextIndex;
-    };
+        new_marks[new_currentIndex - 1].className = "current_mark mark_seleced";
+        setTimeout(function () {
+            new_pre.addEventListener("click",p_event);
+        },600)
+    }
+
+    function n_event(){
+        new_next.removeEventListener("click",n_event);
+        new_pre_action(new_currentIndex,all_new_songs, -1,(ni)=>{
+            new_currentIndex = ni;
+            all_new_songs.style.left = new_currentIndex * -1200 + "px";
+        });
+        for (let i=0; i<new_marks.length; i++){
+            new_marks[i].className = "current_mark";
+        }
+        new_marks[new_currentIndex - 1].className = "current_mark mark_seleced";
+        setTimeout(function () {
+            new_next.addEventListener("click",n_event);
+        },600)
+    }
+    new_pre.addEventListener("click",p_event);
+    new_next.addEventListener("click",n_event);
+    //新歌首发中 标记点击事件
+    for (let j=0; j<new_marks.length; j++){
+        (function (j) {
+            new_marks[j].onclick = function () {
+                let flag = j - new_currentIndex + 1;
+                new_pre_action(new_currentIndex,all_new_songs, flag,(ni)=>{
+                    new_currentIndex = ni;
+                });
+                for (let i=0; i<new_marks.length; i++){
+                    new_marks[i].className = "current_mark";
+                }
+                new_marks[j].className = "current_mark mark_seleced";
+            }
+        })(j)
+    }
 
     //歌单推荐鼠标进入效果
     recommend.mouseover(function () {
@@ -120,6 +150,25 @@ window.onload = function () {
         }
     });
 
+};
+
+/**
+ * 所有轮播动画的监听函数
+ * @param new_currentIndex
+ * @param all_new_songs
+ * @param flag
+ * @param callback
+ */
+function new_pre_action(new_currentIndex, all_new_songs, flag, callback){
+    let new_nextIndex = new_currentIndex + (1 * flag);
+    console.log(new_nextIndex);
+    move(all_new_songs, (new_nextIndex * -1200));
+    if (new_nextIndex === 5){
+        new_nextIndex = 1;
+    }else if (new_nextIndex === 0){
+        new_nextIndex = 4;
+    }
+    callback(new_nextIndex);
 };
 
 
@@ -211,11 +260,10 @@ function move(element, target) {
     timer = setInterval(()=>{
         element.style.left = begin + speed + "px";
         begin = element.offsetLeft;
+        console.log(begin);
         if (begin === target){
             clearInterval(timer);
         }
-        console.log(begin,target);
-
     }, 40);
 
 
