@@ -81,10 +81,10 @@
     position: relative;
 }
 #all-new-songs{
-    width: 4850px;
+    width: 7300px;
     height: 100%;
     position: absolute;
-    left: 0;
+    left: -1200px;
     top: 0;
     /*background-color: red;*/
 }
@@ -174,4 +174,12 @@
     color: #aaa;
     font-size: 13px;
 }
-/* */
+/* mark */
+#news-current-mark{
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    margin-left: -60px;
+}

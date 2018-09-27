@@ -10,8 +10,10 @@ window.onload = function () {
     var rec_slider= document.getElementById("rec-slider-ul");
     var current_mark = document.getElementById("current-mark");
     let all_new_songs = document.getElementById("all-new-songs");
+    let news_current_mark = document.getElementById("news-current-mark");
+    let new_marks = news_current_mark.children;
     var currentIndex = 1, nextIndex = 0;
-    let new_currentIndex = 0, new_nextIndex = 0;
+    let new_currentIndex = 1, new_nextIndex = 0;
     //左箭头点击事件
     pre.onclick = function () {
         pre_action(currentIndex,nextIndex,rec_slider,current_mark,
@@ -48,18 +50,23 @@ window.onload = function () {
     };
 
     //新歌首发中箭头点击事件
-    new_pre.onclick = function(){
+    new_pre.addEventListener("click",new_pre_action);
+    function new_pre_action(){
         new_nextIndex = new_currentIndex + 1;
-        slider_move(new_currentIndex,new_nextIndex,all_new_songs,1200,(x)=>{
-            new_currentIndex = x;
-        })
+        move(all_new_songs, (new_nextIndex * -1200));
+        if (new_nextIndex === 5){
+            new_nextIndex = 1;
+        }
+        new_currentIndex = new_nextIndex;
     };
 
     new_next.onclick = function(){
         new_nextIndex = new_currentIndex - 1;
-        slider_move(new_currentIndex,new_nextIndex,all_new_songs,1200,(x)=>{
-            new_currentIndex = x;
-        })
+        move(all_new_songs, (new_nextIndex * -1200));
+        if (new_nextIndex === 0){
+            new_nextIndex = 4;
+        }
+        new_currentIndex = new_nextIndex;
     };
 
     //歌单推荐鼠标进入效果
@@ -191,52 +198,25 @@ function next_action(currentIndex,nextIndex , slider_dom, mark,callback) {
 }
 
 
-function slider_move(currentIndex, nextIndex,element,itemWidth,callback) {
-    let distanceIndex = currentIndex - nextIndex; //移动的单元数
-    let offsetLeft = element.offsetLeft;
-    let distance = distanceIndex * itemWidth + offsetLeft;
-    // console.log(offsetLeft,distance);
-    if (offsetLeft > distance) {
-        move(element, distance, 1);
-    }else {
-        move(element, distance, 0);
-    }
-
-    console.log(offsetLeft,distance);
-    currentIndex = nextIndex;
-    callback(currentIndex);
-}
-
-function move(element, target, flag) {
-    let begin = 0,speed = 20;
+/**
+ * 移动
+ * @param element
+ * @param target
+ */
+function move(element, target) {
+    let begin = 0, speed = 0;
     let timer;
     begin = element.offsetLeft;
-    if (target < begin){ // -speed 向右走
-        speed = -speed;
-    }
+    speed = (target - begin) * 0.1;
     timer = setInterval(()=>{
-        element.style.left = begin + "px";
-        begin += speed;
-
-        if (flag > 0){
-            if (Math.abs(begin) > Math.abs(target)){
-                clearInterval(timer);
-            }
-            if (element.offsetLeft < -3600){
-                element.style.left = "-3600px";
-                clearInterval(timer);
-            }
-        } else {
-            if (Math.abs(begin) < Math.abs(target)){
-                clearInterval(timer);
-            }
-            if (element.offsetLeft > 0){
-                element.style.left = "0px";
-                clearInterval(timer);
-            }
+        element.style.left = begin + speed + "px";
+        begin = element.offsetLeft;
+        if (begin === target){
+            clearInterval(timer);
         }
+        console.log(begin,target);
 
-    }, 10);
+    }, 40);
 
 
 }
